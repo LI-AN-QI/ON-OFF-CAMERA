@@ -1,0 +1,102 @@
+<!-- 滑到广告，做主播可以轻松赚钱，由于生活压力决定尝试，开始了日复一日直播生活，
+  回复评论，感谢观众。当你通过持续的陪伴&情感输出满足了观众，将收获回报，但如果没有满足观众，
+  将面临是否继续的抉择，以及面对内心压力的逐渐增加 -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Vite App</title>
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Honk&family=Syne+Mono&family=VT323&display=swap"
+    rel="stylesheet">
+
+  <!-- p5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.min.js"></script>
+
+  <script src="libraries/p5.speech.js"></script>
+
+  <!-- ml5 -->
+  <script src="https://unpkg.com/ml5@0.20.0-alpha.4/dist/ml5.min.js"></script>
+
+  <!-- css&js -->
+  <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+
+<body>
+
+  <audio id="bgm2" src="./music/bgm2.wav" loop></audio>
+
+
+  <!-- <section id="page1"> -->
+  <div class="vediocontainer">
+    <div id="camera1"></div>
+  </div>
+
+
+  <div id="streamdata_gift">
+    <div id="pointcontainer">
+      <div id="points"> 0</div>
+      <p id="pointsgoal">/200</p>
+    </div>
+    <img id="giftbkd" src="./img/giftbkd.png" />
+    <img id="coin" src="./img/coin.gif" style="display: none;" />
+  </div>
+
+
+  <img id="heartGif" src="./img/heartGIF.gif" style="display: none;" />
+
+
+
+  <img id="supergift" src="./img/Rocket.GIF" />
+
+
+
+
+  <!-- <img id="bkd_shape1" src="./img/bkd_shape1.png" /> -->
+  <img id="bkd_shape2" src="./img/bkd_shape2.png" />
+  <img id="bkd_shape3" src="./img/bkd_shape3.png" />
+  <img id="bkd_shape4" src="./img/bkd_shape6.png" />
+  <img id="bkd_shape5" src="./img/bkd_shape7.png" />
+
+  <p id="liveshadow3">LIVE</p>
+  <p id="liveshadow4"> </p>
+  <p id="VIKI">@VIKI </p>
+
+  <!-- 评论区 -->
+  <div id="commentContainer" class="comment-container"></div>
+
+  <!-- 语音识别（talk to your viewers...) -->
+  <div id="result"></div>
+
+  <!-- 结束直播按钮 -->
+  <button id="endstream" onclick="window.location.href='message.html'">STOP STREAMING</button>
+
+
+  <div id="giftContainer"></div>
+
+
+
+  <div id="message-container" class="message-container">
+    <div id="message" class="message">Instructions is here</div>
+  </div>
+
+  <!-- </section> -->
+
+  <script src="live.js"></script>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>

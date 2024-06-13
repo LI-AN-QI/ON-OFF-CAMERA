@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vite App</title>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&family=Syne+Mono&family=VT323&display=swap"
+        rel="stylesheet">
+
+    <!-- p5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.min.js"></script>
+
+    <script src="libraries/p5.speech.js"></script>
+
+    <!-- css&js -->
+    <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+
+<body>
+
+    <section id="page1">
+
+        <div id="canvas-container"></div>
+
+        <section id="spot-container">
+            <p id="spot1"></p>
+            <p id="spot2"></p>
+            <p id="spot3"></p>
+            <p id="spot4"></p>
+        </section>
+
+        <img id="twohearts" src="./img/twohearts.png" />
+
+        <audio id="bgm2" src="./music/bgm2.wav" loop></audio>
+
+
+
+        <p id="scorereduce">-10</p>
+        <p id="scoreadd">+5</p>
+
+        <!-- <img id="keyboard" src="./img/keyboard.jpg" /> -->
+        <img id="names" src="./img/name.png" />
+        <img id="names2" src="./img/name.png" />
+
+        <div id="mask_box"></div>
+
+        <div id="wholebackground"></div>
+
+
+
+        <p id="liveshadow6">OFFLINE</p>
+
+        <p id="Messages">Unread Messages</p>
+
+        <p id="line">
+            ------------------------------------------------------------------------------------
+        </p>
+        <p id="line2">
+            ----------------------------------------------------------------------------------
+        </p>
+
+
+
+        <!-- number of new messages -->
+        <p id="newmessagenumber"></p>
+
+
+        <div id="message-container2" class="message-container2">
+            <div id="message2" class="message2">Instructions is here</div>
+        </div>
+
+
+        <div id="end1">
+
+            <p id="failtoplease">
+                You failed to satisfy your top viewers because they feel you haven't taken them seriously enough. <br>
+                Your streaming dream is end. You won't receive gift from them anymore. But you also don't want get
+                bothered
+                by these stranger guys right? You are free now. Somebody else will please them though.
+            </p>
+            <button id="BackButton" onclick="window.location.href='123.html'">BACK</button>
+
+        </div>
+
+
+        <div id="end2">
+
+            <p id="managetoplease">
+                You earned a lot more than other streamers by doing so. But you are also spending too much time and
+                energy
+                to deal
+                with those relationships. Streaming makes you exhausted.
+                <br>But why do you have to please the audience in this way to make money?
+            </p>
+            <button id="BackButton" onclick="window.location.href='index.html'">BACK</button>
+
+        </div>
+
+
+
+    </section>
+
+    <script src="message.js"></script>
+
+</body>
+
+</html>

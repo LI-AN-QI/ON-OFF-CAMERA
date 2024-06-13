@@ -1,0 +1,113 @@
+<!--
+  👋 Hello! This is an ml5.js example made and shared with ❤️.
+  Learn more about the ml5.js project: https://ml5js.org/
+  ml5.js license and Code of Conduct: https://github.com/ml5js/ml5-next-gen/blob/main/LICENSE.md
+
+  This example demonstrates tracking a particular face feature through ml5.faceMesh.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000;
+      font-family: "VT323", monospace;
+      cursor: url('./img/cursor.png'), auto;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      /* Disable scroll */
+
+    }
+
+    @keyframes colorChange {
+      0% {
+        background-color: #000;
+      }
+
+      50% {
+        background-color: rgb(255, 0, 157);
+        /* Replace with your desired color value */
+      }
+
+      100% {
+        background-color: #000;
+      }
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ml5.js faceMesh p5 Webcam Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.20.0-alpha.4/dist/ml5.min.js"></script>
+  <!-- Import the model -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-segmentation"></script>
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Honk&family=Syne+Mono&family=VT323&display=swap"
+    rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <div id="place1" style="width: 400px;height: 200px;position: absolute;right: 45px;bottom: 40px;z-index: 5;"></div>
+  <div id="place2" style="width: 100px;height: 100px;position: absolute;left: 65px;bottom: 50px;z-index: 5;"></div>
+
+  <img id="hearthover" src="./img/heartgift2.gif"
+    style="z-index: 2;position: absolute;left: 0px;bottom: 0px;height:100vh;display: none;" />
+
+  <img id="stickers" src="./img/stickers.png" style="z-index: 3;position: absolute;width: 100vw;" />
+  <img id="about" src="./img/about.png" style="z-index: 2;position: absolute;width: 100vw;display: none;" />
+  <img src="./img/coverimg.png" style="z-index: 1;position: absolute;width: 100vw;" />
+  <!-- <img src="./img/tv.png" style="z-index: 2;position: absolute;width: 1000px;height: 780px;" /> -->
+
+
+
+
+  <script src="123.js"></script>
+
+
+
+
+  <p style="z-index: 3;color: white;position: absolute;bottom: 50px;font-size: 30px;animation: blink 1.5s infinite;">
+    press
+    space to start</p>
+
+</body>
+
+</html>
