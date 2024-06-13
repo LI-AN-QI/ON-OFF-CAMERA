@@ -8,17 +8,6 @@ html {
     font-family: "VT323", monospace;
     overflow: hidden;
     cursor: url('./img/cursor.png'), auto;
-    /* font-family: "Syne Mono", monospace; */
-
-
-    /* font-family: "Honk", system-ui;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-    "MORF" 15,
-    "SHLN" 50; */
-
     background-color: rgb(0, 0, 0);
     z-index: -2;
 }
@@ -46,35 +35,6 @@ html {
     margin-top: 3%;
 }
 
-#light {
-    z-index: -3;
-    width: 38%;
-    position: absolute;
-    /* margin-top: 9%; */
-}
-
-#avatar1 {
-    position: absolute;
-    z-index: 1;
-    width: 6%;
-    margin-left: -24%;
-    margin-top: -38%;
-}
-
-.glow {
-    filter: brightness(150%) blur(5px);
-    animation: glow 2s infinite alternate-reverse;
-}
-
-@keyframes glow {
-    0% {
-        opacity: 0.5;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
 
 
 
@@ -482,57 +442,6 @@ html {
     }
 }
 
-#bkd3 {
-    position: fixed;
-    width: 39%;
-    height: 710px;
-    margin-left: -64.6%;
-    z-index: 3;
-    opacity: 0;
-    /* 初始时设置为透明 */
-    transition: opacity 2s ease-in-out;
-    /* 添加过渡效果 */
-    /* animation: glow2 2s infinite alternate-reverse; */
-}
-
-#bkd3.show {
-    opacity: 1;
-    /* 通过添加类名 show 来触发过渡效果 */
-}
-
-
-#bkd4 {
-    position: fixed;
-    width: 39%;
-    margin-left: 64.6%;
-    height: 710px;
-    z-index: 3;
-    opacity: 0;
-    /* 初始时设置为透明 */
-    transition: opacity 2s ease-in-out;
-    /* 添加过渡效果 */
-    /* animation: glow2 2s infinite alternate-reverse; */
-}
-
-#bkd4.show {
-    opacity: 1;
-    /* 通过添加类名 show 来触发过渡效果 */
-}
-
-#liveend {
-    position: absolute;
-    width: 39%;
-    z-index: 2;
-    opacity: 0;
-    margin-top: 0%;
-    transition: opacity 2s ease-in-out;
-}
-
-#liveend.show {
-    opacity: 1;
-    /* 通过添加类名 show 来触发过渡效果 */
-}
-
 
 
 
@@ -563,15 +472,6 @@ html {
 
 }
 
-
-
-#camerafilter1 {
-    position: absolute;
-    width: 25%;
-    margin-left: -65.5%;
-    margin-top: -4.5%;
-    opacity: 0.5;
-}
 
 
 #streamerid {

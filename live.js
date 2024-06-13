@@ -1,6 +1,6 @@
 //Question: draw based on eye?
 let faceMesh;
-let eye;
+
 let faces = [];
 let options = {
     maxFaces: 20,
@@ -148,7 +148,6 @@ function preload() {
     commentsound = loadSound('./music/comment.mp3');
     coinsound = loadSound('./music/coin.MP3');
     faceMesh = ml5.faceMesh(options);
-    eye = loadImage('img/eye.png');
     spot = loadImage('img/bkd_shape1.png');
 }
 
@@ -246,27 +245,6 @@ function draw() {
 
 
 
-    // //draw eyes
-    // for (let j = 0; j < faces.length; j++) {
-    //     let face = faces[j];
-    //     console.log(face);
-
-
-
-
-    //     let lefteyepoint = face.leftEye;
-    //     let lefteyex = lefteyepoint.x;
-    //     let lefteyey = lefteyepoint.y;
-    //     fill(0)
-    //     rect(lefteyex, lefteyey, 500, 500)
-    //     image(eye, lefteyex / 2, lefteyey / 2 - 10, 20, 30)
-
-    //     let righteyepoint = face.rightEye;
-    //     let righteyex = righteyepoint.x;
-    //     let righteyey = righteyepoint.y;
-    //     image(eye, righteyex / 2 - 2, righteyey / 2 - 10, 20, 30)
-
-    // }
 
     //根据声音绘制波浪
     calcWave();
