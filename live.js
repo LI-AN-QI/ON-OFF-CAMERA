@@ -14,11 +14,9 @@ let options = {
 
 
 const messages = [
-    "Hey VIKI. Welcome to your first live!",
-    "Yes, this is the nickname we designed for you!💕",
-    "I will tell you everything about streaming,🤗",
-    "And let you understand how to interact with your viewers.",
-    "So always keep an eye for my messages.🧐",
+    "Hey VIKI, I'm your livestream operation assistant. Welcome to your first live!🎉",
+    "VIKI is the nickname we designed for you💕",
+    "I will tell you everything about streaming,so always keep an eye for my messages.🧐",
     "Now let's start with the basics.👍",
     "Have you noticed the live comment on the left?",
     "Try to say ❕WELCOME + USERNAME❕ when viewers joined.",
@@ -33,7 +31,7 @@ const secondMessage = [
 
 
 const thirdMessage = [
-    "WOAH. Someone just sent you a gift that worth ￥500😯😯😯.",
+    "WOAH. That rocket🚀 gift is worth over ￥1000😯😯😯.",
     "You are doing well!",
     "I know I was right about you.",
     "You have already attracted those who are willing to spend money on your gifts.💴",
@@ -72,9 +70,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5000);
         }
     }
+
     showMessage();
-    // resetNoSpeechTimeout();
+
 });
+
+const MessageQueue = [];
+function consumeMessageQueue() {
+    if (MessageQueue.length > 0) {
+        const message = MessageQueue.shift();
+        console.log('m length', MessageQueue.length);
+        messageElement.textContent = message;
+        messageContainer.classList.remove('hidden');
+        setTimeout(() => {
+            messageContainer.classList.add('hidden');
+            consumeMessageQueue();
+        }, 4500);
+    } else {
+        setTimeout(consumeMessageQueue, 500);
+    }
+    //showDebugMessage();
+}
+// const debugDom = document.getElementById('debug');
+// function showDebugMessage() {
+//     debugDom.innerHTML = MessageQueue.map((m, i) => `<div>${i}: ${m}</div>`).join('');
+// }
+
+function showMessage(message) {
+    // showDebugMessage();
+    MessageQueue.push(message);
+}
+
+consumeMessageQueue();
 
 
 let secondIndex = 0;
@@ -94,7 +121,7 @@ function showSecondMessage() {
     if (secondIndex >= secondMessage.length) {
         console.log("detect start")
         //resetNoSpeechTimeout()
-        setTimeout(showMessageSaySomething, 6000);
+        setTimeout(showMessageSaySomething, 6500);
     }
 
 }
@@ -129,7 +156,7 @@ function showMessageSaySomething() {
             messageContainer.classList.add('hidden');
             saysomethingIndex++;
             setTimeout(showMessageSaySomething, 500);
-        }, 3000);
+        }, 5000);
     }
 }
 
@@ -186,15 +213,15 @@ let resultText = '';
 
 
 
-
-
-
 function setup() {
-    // 创建语音识别对象
+
     speechRec = new p5.SpeechRec('en-US', gotSpeech);
     let continuous = true;
     let interimResults = false;
     speechRec.start(continuous, interimResults);
+
+
+
 
 
     // 初始化监听状态(文字placeholder)：TALK TO YOUR VIEWERS...
@@ -234,6 +261,7 @@ let totalTime = 0;
 //let currentTime = millis(); // 当前时间
 
 function draw() {
+
     background(158, 226, 252);
     translate(width, 0);
     scale(-1, 1);//Mirroring the Video 
@@ -261,10 +289,20 @@ function countWords(text) {
     return words.length; // 返回单词数量
 }
 
+function matchSentence(text) {
+    return targetSentences.some(sentence => {
+        if (text.includes(sentence)) {
+            return true;
+        }
+    });
+}
+
 // 监听语音识别结果
+
 function gotSpeech() {
     if (speechRec.resultValue) {
         let transcript = speechRec.resultString.toLowerCase(); // 获取识别的文本并转换为小写
+
         console.log("you said: " + speechRec.resultString)
 
 
@@ -277,7 +315,7 @@ function gotSpeech() {
 
 
         // 检查识别结果是否包含目标句子，如果包含则增加积分
-        if (targetSentences.includes(transcript)) {
+        if (matchSentence(transcript)) {
             //When get score, 
             points += 20;
             document.getElementById('points').textContent = `${points}`;
@@ -337,37 +375,58 @@ function gotSpeech() {
 
 
 
-    if (points > 20) {
-        showSecondMessage();
-    }
 
-    //大于100时，展示礼物
-    if (points > 100) {
-        console.log("show a giftcomment ")
-        // 开始展示礼物
-        showgift();
-        //whenever a gitf comment show, a gift gif show
 
-        //when you put on the right headware, you will get a gift
-    }
-
-    if (points > 200 || points == 200) {
-        console.log("show third comment")
-        showThirdMessage();
-        setTimeout(() => {
-            //显示结束直播的按钮
-            endstream.style.display = 'block';
-            //window.location.href = 'message.html';
-        }, 36000);
-    }
 
 
 
     console.log(points);
     // Reset the no-speech timer every time speech is detected
     //resetNoSpeechTimeout();
+    pushMessagesBasedonPoints(points);
+}
+
+
+let is20Shown = false;
+let is80Shown = false;
+let is200Shown = false;
+function pushMessagesBasedonPoints(points) {
+    console.log("points: " + points);
+
+    if (points > 20 && !is20Shown) {
+        is20Shown = true;
+        // showSecondMessage();
+        secondMessage.forEach(showMessage);
+        setTimeout(() => {
+            saysomething.forEach(showMessage);
+        }, 5000);
+    }
+
+    //大于100时，展示礼物
+    if (points > 80 && !is80Shown) {
+        is80Shown = true;
+        console.log("show a giftcomment ")
+        // 开始展示礼物
+        showgift();
+        //whenever a gitf comment show, a gift gif show
+
+
+    }
+
+    if (points > 200 && !is200Shown) {
+        is200Shown = true;
+        console.log("show third comment")
+        thirdMessage.forEach(showMessage);
+        setTimeout(() => {
+            //显示结束直播的按钮
+            endstream.style.display = 'block';
+            //window.location.href = 'message.html';
+        }, 36000);
+
+    }
 
 }
+
 
 // const noSpeechDuration = 6000; // 6s seconds 
 // //let noSpeechTimeout;
@@ -422,43 +481,74 @@ const targetSentences = [
     'hi',
     'hello',
     'thank you',
-    'welcome bob',
-    'welcome lily',
-    'welcome yellowsnoeman',
-    'welcome happy chatter',
-    'welcome juju',
-    'welcome john',
-    'welcome pizza time king',
-    'welcome kirby',
-    'welcome google was my idea',
-    'welcome bear X',
-    'welcome duck simulator',
-    'welcome everybody',
-    'welcome hey you',
-    'welcome almond milk',
-    'welcome username copied',
-    'welcome something',
-    'welcome ja-hao',
-    'welcome unfriend me',
-    'welcome baby doodles',
-    'welcome kim chi',
-    'welcome i drink chocolatemilk',
-    'welcome just a harmless potato',
-    'welcome ima robot',
-    'welcome susu',
-    'welcome turkey sandwich',
-    'welcome UFO believer',
-    'welcome unnecessary',
-    'welcome the failure',
-    'welcome test name',
-    'welcome definitely not an athlete',
-    'welcome magic school',
+    'bob',
+    'lily',
+    'yellow snowman',
+    'happy chatter',
+    'juju',
+    'john',
+    'pizza time king',
+    'kirby',
+    'google was my idea',
+    'bear',
+    'duck simulator',
+    'everybody',
+    'hey you',
+    'almond milk',
+    'username copied',
+    'something',
+    'ja-hao',
+    'unfriend me',
+    'baby doodles',
+    'kimchi',
+    'i drink chocolatemilk',
+    'just a harmless potato',
+    'ima robot',
+    'susu',
+    'turkey sandwich',
+    'UFO believer',
+    'unnecessary',
+    'the failure',
+    'test name',
+    'yellow snowman',
+    'definitely not an athlete',
+    'magic school',
     'thank you noah',
-    'welcome everyone to my stream'];
+    'everyone'
+];
 
 //每隔1s生成一条弹幕
 //其中夹杂 XXX joined (读出名字触发积分)
 let comments = [
+    "♦0 user: WOAH!!!",
+    "♦0 user: hey!!",
+    // "♦0 user: thesis show!🤘🤘",
+    "♦0 user: ❤️❤️❤️❤️",
+    // "Dragonfruit joined",
+    // "♦2 user: hey ANQI!",
+    "♦2 user: hiiii",
+    // "♦2 user: hi Anqi",
+    "♦2 user: 👋👋👋👋",
+    // "♦0 user: livestream in a livestream🤔",
+    // "♦0 user: live stream loooooooop!",
+    // "♦0 user: 😂😂😂😂",
+    // "Dragonfruit joined",
+    // "♦0 user: Is she a real streamer?",
+    // "♦1 user: I think she's not",
+    // "♦0 user: 👀👀👀👀👀",
+    // "♦0 user: why do you want to make the game?",
+    // "Dragonfruit joined",
+    // "♦2 user: I know her project!",
+    // "♦3 user: It's more than just stream.",
+    "♦2 user: interesting😶",
+    // "♦0 user: you guys must try it",
+    // "♦2 user: I will follow you then lol",
+    // "♦1 user: let's get started!!!",
+
+
+
+
+
     "♦0 Anonymous user: hi",
     "♦0 Anonymous user: ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️",
     "♦0 Anonymous user: hey VIKI",
@@ -498,7 +588,7 @@ let comments = [
     "Kirby joined",
     "♦2 Anonymous user: 主播平时什么时候直播",
     "♦0 Anonymous user: pretty girl 😻",
-    "♦0 Anonymous user: 😇💝💖❤️❤️❤️❤️❤️❤️💙",
+    "♦0 Anonymous user: 😇💝💖❤️❤️❤️❤️❤️❤️",
     "pizza_time_king joined",
     "♦3 Anonymous user: You look adorable in your outfit",
     "♦3 Anonymous user: how old are you",
@@ -511,7 +601,7 @@ let comments = [
     "♦2 Anonymous user: 666",
     "♦2 Anonymous user: **！这不那谁吗",
     "♦0 Anonymous user: 👀WOAHHHHHH",
-    "♦1 Anonymous user: May I ask whre you are from",
+    "♦1 Anonymous user: May I ask where you are from",
     "Ja-Hao joined",
     "♦8 Anonymous user: i know u see me bb girl",
     "♦8 Anonymous user: I will follow you then lol",
@@ -550,7 +640,7 @@ let comments = [
     "Bob left",
     "♦0 Anonymous user: can you take off your beauty filter",
     "♦0 Anonymous user: 榜一大哥真厉害",
-    "bearX joined",
+    "bear joined",
     "♦3 Anonymous user: why didn't you welcome me",
     "♦0 Anonymous user: SHE SAID SHE CANT",
     "hey_you joined",
@@ -588,6 +678,8 @@ let comments = [
     "Unnecessary joined",
     "The.Failure followed you",
     "YellowSnowman joined",
+    "🔔STREAM IS OVER🔔",
+    "🔔PLEASE STOP STEAMING🔔",
 
 ];
 
@@ -640,8 +732,8 @@ function displayComment() {
 //提示显示完后展示弹幕
 setTimeout(() => {
     setInterval(displayComment, 1000); // Display a comment every random(0-5) seconds
-}, 30000);
-//now editing, 原来：30000
+}, 20000);
+
 
 //礼物
 const giftContainer = document.getElementById('giftContainer');

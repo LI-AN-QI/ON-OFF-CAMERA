@@ -19,9 +19,10 @@ let sentences = [
     "why don't you reply to my messages",
     "I want to know you better",
     "can you be my girlfriend",
-    " I can give you money",
+    "I can give you money",
     "I want to see you in person",
     "I can give you money",
+    "I'm tired of my job",
 ];
 
 
@@ -58,8 +59,8 @@ function draw() {
         circle.display();
     }
     fill(245, 165, 232);
-    textSize(28);
-    text('VIPs LOYALTY: ' + score, width / 2 + 10, 60);
+    textSize(50);
+    text('VIEWER LOYALTY: ' + score, width / 2 + 10, 50);
 
     if (draggingCircle) {
         draggingCircle.x = mouseX;
@@ -75,11 +76,11 @@ function draw() {
 
 //检查分数
 function checkScore() {
-    if (score <= 0) {
+    if (score < 0) {
         document.getElementById('end1').style.display = 'block';
     }
 
-    if (score >= 100) {
+    if (score > 90) {
         document.getElementById('end2').style.display = 'block';
     }
 }
@@ -222,6 +223,7 @@ const messages2 = [
     "Don't care too much on what they said",
     "Remember, all you want is money, you are not finding love here",
     "Don't let your viewer loyalty drop",
+    "Try to get your viewer loyalty to 100",
 ]
 
 let currentIndex = 0;
@@ -247,7 +249,7 @@ function showMessage() {
         setTimeout(() => {
             messageContainer.classList.add('hidden');
             currentIndex++;
-            setTimeout(showMessage, 500);
+            setTimeout(showMessage, 1000);
 
             setTimeout(() => {
                 document.getElementById('names').classList.add('show');

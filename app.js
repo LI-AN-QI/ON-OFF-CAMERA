@@ -13,6 +13,14 @@ const place1 = document.getElementById('place1');
 const place2 = document.getElementById('place2');
 const about = document.getElementById('about');
 const hearthover = document.getElementById('hearthover');
+const start = document.getElementById('start');
+
+start.addEventListener('mouseover', () => {
+  start.textContent = 'ONLINE';
+});
+start.addEventListener('mouseout', function () {
+  start.textContent = 'OFFLINE';
+});
 
 place1.addEventListener('mouseover', () => {
   about.style.display = 'block';
@@ -33,7 +41,7 @@ place2.addEventListener('mouseout', () => {
 
 
 
-let times = 1.5;
+let times = 1.8;
 function preload() {
   faceMesh = ml5.faceMesh(options);
 }
@@ -62,7 +70,7 @@ function draw() {
   let g = 128 + 128 * sin(millis() / 1500);
   let b = 128 + 128 * sin(millis() / 2000);
 
-  tint(r, g, b);
+  // tint(r, g, b);
 
   // draw the webcam video
   image(video, 0, 0, width, height);
@@ -103,46 +111,6 @@ function updateSentence() {
 
 }
 
-// each face contains the following properties:
-/*
-  lips
-  leftEye
-  leftEyebrow
-  rightEye
-  rightEyebrow
-  faceOval
-  box
-  keypoints(468) - entire points
-*/
-
-// the box contains the following properties:
-/*
-  xMin
-  xMax
-  yMin
-  yMax
-  width
-  height
-*/
-
-// each part contains the following properties:
-/*
-  x
-  y
-  width
-  height
-  centerX
-  centerY
-  keypoints(17) - entire points in the part
-*/
-
-// each part's keypoint contains the following properties:
-/*
-  x
-  y
-  z
-  name
-*/
 
 document.addEventListener('keydown', function (event) {
   if (event.code === 'Space') {
